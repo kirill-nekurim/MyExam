@@ -1,15 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package org.example.GUI;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.example.entities.Group;
+import org.example.operations.ExcelHandler;
 
 /**
  *
  * @author kiril
  */
 public class Interface extends javax.swing.JFrame {
-
+private ArrayList<Group> groups;
     /**
      * Creates new form Interface
      */
@@ -17,6 +24,8 @@ public class Interface extends javax.swing.JFrame {
         initComponents();
     }
 
+    private final JFileChooser jFileChooser = new JFileChooser();
+    private final JFileChooser jFolderChooser = new JFileChooser();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,21 +35,175 @@ public class Interface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        starPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        importStudentsButton = new javax.swing.JButton();
+        varFolderButton = new javax.swing.JButton();
+        jPanelChooseGroup = new javax.swing.JPanel();
+        noWorkButton = new javax.swing.JButton();
+        openVarButton = new javax.swing.JButton();
+        deleteRateButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        studentsInfo = new javax.swing.JList<>();
+        numberGroup = new javax.swing.JComboBox<>();
+        createGroupReportButton = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        importStudentsButton.setText("Import students");
+        importStudentsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importStudentsButtonActionPerformed(evt);
+            }
+        });
+
+        varFolderButton.setText("Choose variant's folder");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(importStudentsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(varFolderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(varFolderButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                    .addComponent(importStudentsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        noWorkButton.setText("No work");
+
+        openVarButton.setText("Rate work");
+
+        deleteRateButton.setText("Delete rate");
+
+        studentsInfo.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(studentsInfo);
+
+        numberGroup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        createGroupReportButton.setText("Group report");
+        createGroupReportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createGroupReportButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelChooseGroupLayout = new javax.swing.GroupLayout(jPanelChooseGroup);
+        jPanelChooseGroup.setLayout(jPanelChooseGroupLayout);
+        jPanelChooseGroupLayout.setHorizontalGroup(
+            jPanelChooseGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelChooseGroupLayout.createSequentialGroup()
+                .addGroup(jPanelChooseGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelChooseGroupLayout.createSequentialGroup()
+                        .addComponent(noWorkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(openVarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(deleteRateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelChooseGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(numberGroup, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(createGroupReportButton, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanelChooseGroupLayout.setVerticalGroup(
+            jPanelChooseGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelChooseGroupLayout.createSequentialGroup()
+                .addGroup(jPanelChooseGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(deleteRateButton, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(openVarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(noWorkButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelChooseGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelChooseGroupLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanelChooseGroupLayout.createSequentialGroup()
+                        .addComponent(numberGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(createGroupReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+        );
+
+        javax.swing.GroupLayout starPanelLayout = new javax.swing.GroupLayout(starPanel);
+        starPanel.setLayout(starPanelLayout);
+        starPanelLayout.setHorizontalGroup(
+            starPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(starPanelLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(starPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelChooseGroup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        starPanelLayout.setVerticalGroup(
+            starPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(starPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelChooseGroup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(starPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(starPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void importStudentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importStudentsButtonActionPerformed
+         FileNameExtensionFilter filter = new FileNameExtensionFilter("", "xlsx");
+            jFileChooser.setFileFilter(filter);
+            jFileChooser.showDialog(null, "Choose file:");
+            File file = jFileChooser.getSelectedFile();
+            try {
+                DefaultComboBoxModel<String> cbModel = new DefaultComboBoxModel<>();
+                groups = ExcelHandler.importStudents(file);
+                for (Group group : groups) {
+                    cbModel.addElement(group.getName());
+                }
+                numberGroup.setModel(cbModel);
+                numberGroup.setEnabled(true);
+                //allReportButton.setEnabled(true);
+                JOptionPane.showMessageDialog(Interface.this, "Студенты импортированы");
+            } catch (IOException | InvalidFormatException ex) {
+                JOptionPane.showMessageDialog(Interface.this, "Ошибка при импорте файла");
+            } catch (IllegalArgumentException illegalArgumentException) {
+                JOptionPane.showMessageDialog(Interface.this, "Файл не выбран");
+            }
+    }//GEN-LAST:event_importStudentsButtonActionPerformed
+
+    private void createGroupReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createGroupReportButtonActionPerformed
+
+    }//GEN-LAST:event_createGroupReportButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +241,17 @@ public class Interface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton createGroupReportButton;
+    private javax.swing.JButton deleteRateButton;
+    private javax.swing.JButton importStudentsButton;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelChooseGroup;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton noWorkButton;
+    private javax.swing.JComboBox<String> numberGroup;
+    private javax.swing.JButton openVarButton;
+    private javax.swing.JPanel starPanel;
+    private javax.swing.JList<String> studentsInfo;
+    private javax.swing.JButton varFolderButton;
     // End of variables declaration//GEN-END:variables
 }
