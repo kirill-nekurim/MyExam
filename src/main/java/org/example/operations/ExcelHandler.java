@@ -14,6 +14,7 @@ import org.example.entities.Var;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static org.example.operations.ImportTask.importTask;
 import static org.example.operations.TaskCondition.getCondition;
 
 public class ExcelHandler {

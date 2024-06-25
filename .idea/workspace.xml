@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41e4b4e8-35be-4d84-a43a-7dd9ca14e10b" name="Changes" comment="Классы для работы с данными">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/operations/ExcelHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/operations/TaskCondition.java" afterDir="false" />
+    <list default="true" id="41e4b4e8-35be-4d84-a43a-7dd9ca14e10b" name="Changes" comment="реализовал excel handler. не реализовал импорт данных об одном задании из файла Excel">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/operations/ImportTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/entities/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/entities/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/entities/StudentRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/entities/StudentRecord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/entities/Var.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/entities/Var.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/operations/ExcelHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/operations/ExcelHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/operations/TaskCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/operations/TaskCondition.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +50,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/kiril/OneDrive/Desktop/JavaProj/exam",
     "onboarding.tips.debug.path": "C:/Users/kiril/OneDrive/Desktop/JavaProj/MyExam/src/main/java/org/example/Main.java",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
@@ -84,11 +82,20 @@
       <option name="project" value="LOCAL" />
       <updated>1719277483264</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="реализовал excel handler. не реализовал импорт данных об одном задании из файла Excel">
+      <option name="closed" value="true" />
+      <created>1719312969441</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1719312969441</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Классы для работы с данными" />
-    <option name="LAST_COMMIT_MESSAGE" value="Классы для работы с данными" />
+    <MESSAGE value="реализовал excel handler. не реализовал импорт данных об одном задании из файла Excel" />
+    <option name="LAST_COMMIT_MESSAGE" value="реализовал excel handler. не реализовал импорт данных об одном задании из файла Excel" />
   </component>
 </project>

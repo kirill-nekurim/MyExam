@@ -8,6 +8,7 @@ public class TaskCondition {
 
     /**
      * Метод записи условия к заданиям из файла эксель
+     * Задание найдено, считываем данные на следующих строках
      * @param lastSheet
      * @param task
      */
@@ -20,7 +21,7 @@ public class TaskCondition {
             XSSFRow row = lastSheet.getRow(rowIndex);
             if (row != null && row.getCell(0) != null &&
                     row.getCell(0).getStringCellValue().equals("Задание " + (task.getTaskNumber() + 1))) {
-                // Задание найдено, считываем данные на следующих строках
+
                 maxGrade = Integer.parseInt(lastSheet.getRow(rowIndex + 3).getCell(1).getStringCellValue());
                 foundCondition = lastSheet.getRow(rowIndex + 6).getCell(0).getStringCellValue();
                 break;
