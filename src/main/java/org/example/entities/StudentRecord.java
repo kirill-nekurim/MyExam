@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class StudentRecord {
     ArrayList<Task> tasks;
-    boolean noWork = false;
+    boolean hasNoWork = false;
 
-    public boolean isNoWork() {
-        return noWork;
+    public boolean isHasNoWork() {
+        return hasNoWork;
     }
 
-    public void setNoWork(boolean noWork) {
-        this.noWork = noWork;
+    public void setHasNoWork(boolean hasNoWork) {
+        this.hasNoWork = hasNoWork;
     }
 
     public ArrayList<Task> getTasks() {

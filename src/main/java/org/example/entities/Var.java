@@ -15,8 +15,6 @@ public class Var {
 
     @Override
     public String toString() {
-        return "Variant{" +
-                "tasks=" + tasks +
-                "}";
+        return "Variant{" + "tasks=" + tasks + "}";
     }
 }
