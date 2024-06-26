@@ -3,12 +3,19 @@ package org.example.GUI;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
 import org.example.entities.Group;
+import org.example.entities.Student;
+import org.example.entities.StudentRecord;
+import org.example.entities.Var;
 import org.example.operations.ExcelHandler;
 
 /**
@@ -17,11 +24,20 @@ import org.example.operations.ExcelHandler;
  */
 public class Interface extends javax.swing.JFrame {
 private ArrayList<Group> groups;
+private File varFolder;
+private Group chosenGroup;
+ private int varNum;
     /**
      * Creates new form Interface
      */
     public Interface() {
         initComponents();
+         setContentPane(startPanel);
+        setTitle("Создание отчета о работах студентов");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(800, 500);
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     private final JFileChooser jFileChooser = new JFileChooser();
@@ -35,18 +51,18 @@ private ArrayList<Group> groups;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        starPanel = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        startPanel = new javax.swing.JPanel();
+        simplePanel = new javax.swing.JPanel();
         importStudentsButton = new javax.swing.JButton();
         varFolderButton = new javax.swing.JButton();
         jPanelChooseGroup = new javax.swing.JPanel();
         noWorkButton = new javax.swing.JButton();
         openVarButton = new javax.swing.JButton();
         deleteRateButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        studentsInfo = new javax.swing.JList<>();
         numberGroup = new javax.swing.JComboBox<>();
         createGroupReportButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        studentInfoList = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,41 +74,59 @@ private ArrayList<Group> groups;
         });
 
         varFolderButton.setText("Choose variant's folder");
+        varFolderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                varFolderButtonActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout simplePanelLayout = new javax.swing.GroupLayout(simplePanel);
+        simplePanel.setLayout(simplePanelLayout);
+        simplePanelLayout.setHorizontalGroup(
+            simplePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(simplePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(importStudentsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67)
                 .addComponent(varFolderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+        simplePanelLayout.setVerticalGroup(
+            simplePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, simplePanelLayout.createSequentialGroup()
+                .addGroup(simplePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(varFolderButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                     .addComponent(importStudentsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         noWorkButton.setText("No work");
+        noWorkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noWorkButtonActionPerformed(evt);
+            }
+        });
 
         openVarButton.setText("Rate work");
+        openVarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openVarButtonActionPerformed(evt);
+            }
+        });
 
         deleteRateButton.setText("Delete rate");
-
-        studentsInfo.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        deleteRateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteRateButtonActionPerformed(evt);
+            }
         });
-        jScrollPane1.setViewportView(studentsInfo);
 
         numberGroup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        numberGroup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numberGroupActionPerformed(evt);
+            }
+        });
 
         createGroupReportButton.setText("Group report");
         createGroupReportButton.addActionListener(new java.awt.event.ActionListener() {
@@ -101,19 +135,33 @@ private ArrayList<Group> groups;
             }
         });
 
+        studentInfoList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        studentInfoList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                studentInfoListValueChanged(evt);
+            }
+        });
+        jScrollPane2.setViewportView(studentInfoList);
+
         javax.swing.GroupLayout jPanelChooseGroupLayout = new javax.swing.GroupLayout(jPanelChooseGroup);
         jPanelChooseGroup.setLayout(jPanelChooseGroupLayout);
         jPanelChooseGroupLayout.setHorizontalGroup(
             jPanelChooseGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelChooseGroupLayout.createSequentialGroup()
-                .addGroup(jPanelChooseGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelChooseGroupLayout.createSequentialGroup()
+                .addGroup(jPanelChooseGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelChooseGroupLayout.createSequentialGroup()
                         .addComponent(noWorkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(openVarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(deleteRateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(deleteRateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelChooseGroupLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelChooseGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(numberGroup, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -130,31 +178,29 @@ private ArrayList<Group> groups;
                 .addGap(18, 18, 18)
                 .addGroup(jPanelChooseGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelChooseGroupLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanelChooseGroupLayout.createSequentialGroup()
                         .addComponent(numberGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(createGroupReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(createGroupReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        javax.swing.GroupLayout starPanelLayout = new javax.swing.GroupLayout(starPanel);
-        starPanel.setLayout(starPanelLayout);
-        starPanelLayout.setHorizontalGroup(
-            starPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(starPanelLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout startPanelLayout = new javax.swing.GroupLayout(startPanel);
+        startPanel.setLayout(startPanelLayout);
+        startPanelLayout.setHorizontalGroup(
+            startPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(startPanelLayout.createSequentialGroup()
+                .addComponent(simplePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(starPanelLayout.createSequentialGroup()
+            .addGroup(startPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelChooseGroup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        starPanelLayout.setVerticalGroup(
-            starPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(starPanelLayout.createSequentialGroup()
+        startPanelLayout.setVerticalGroup(
+            startPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(startPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(simplePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelChooseGroup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -165,14 +211,14 @@ private ArrayList<Group> groups;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(starPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(startPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(starPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(startPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -205,6 +251,87 @@ private ArrayList<Group> groups;
 
     }//GEN-LAST:event_createGroupReportButtonActionPerformed
 
+    private void varFolderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_varFolderButtonActionPerformed
+        try {
+                jFolderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                jFolderChooser.showDialog(null, "Выбрать папку:");
+                varFolder = jFolderChooser.getSelectedFile();
+                JOptionPane.showMessageDialog(Interface.this, "Выбрана папка " + varFolder.getName());
+            } catch (IllegalArgumentException | NullPointerException exception) {
+                JOptionPane.showMessageDialog(Interface.this, "Папка не выбрана");
+            }
+    }//GEN-LAST:event_varFolderButtonActionPerformed
+
+    private void noWorkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noWorkButtonActionPerformed
+        StudentRecord noWorkReport = new StudentRecord();
+            noWorkReport.setHasNoWork(true);
+            chosenGroup.getStudents().get(studentInfoList.getSelectedIndex()).setReport(noWorkReport);
+            updateStudentsList();
+    }//GEN-LAST:event_noWorkButtonActionPerformed
+
+    private void openVarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openVarButtonActionPerformed
+       Student student = (Student) studentInfoList.getSelectedValue();
+            if (student != null) {
+                varNum = student.getVar();
+                try {
+                    String path = varFolder.getPath() + "\\" + varNum + ".xlsx";
+                    Var variant = ExcelHandler.importVar(path);
+                    StudentEstimation estimation = new StudentEstimation();
+                    setEnabled(false);
+                    groups.get(numberGroup.getSelectedIndex()).getStudents().get(studentInfoList.getSelectedIndex())
+                            .setReport(estimation.getReport());
+                } catch (IOException | InvalidOperationException | NullPointerException ex) {
+                    JOptionPane.showMessageDialog(Interface.this, "Не найден файл варианта");
+                }
+            } else JOptionPane.showMessageDialog(Interface.this, "Студент не выбран");
+            updateStudentsList();
+    }//GEN-LAST:event_openVarButtonActionPerformed
+
+    private void deleteRateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRateButtonActionPerformed
+       int chosenStudentIndex = studentInfoList.getSelectedIndex();
+            Student chosenStudent = chosenGroup.getStudents().get(chosenStudentIndex);
+            chosenStudent.setReport(null);
+            updateStudentsList();
+    }//GEN-LAST:event_deleteRateButtonActionPerformed
+
+    private void numberGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberGroupActionPerformed
+        DefaultListModel<Student> listModel = new DefaultListModel<>();
+            String groupName = (String) numberGroup.getSelectedItem();
+            chosenGroup = groups.stream().filter(group1 -> Objects.equals(group1.getName(), groupName)).findFirst().get();
+            for (Student student : chosenGroup.getStudents()) {
+                listModel.addElement(student);
+            }
+            studentInfoList.setModel(listModel);
+            studentInfoList.setSelectedIndex(0);
+            createGroupReportButton.setEnabled(true);
+    }//GEN-LAST:event_numberGroupActionPerformed
+
+    private void studentInfoListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_studentInfoListValueChanged
+        int chosenStudentIndex = studentInfoList.getSelectedIndex();
+            try {
+                Student chosenStudent = chosenGroup.getStudents().get(chosenStudentIndex);
+                if (chosenStudent.getReport() != null) {
+                    openVarButton.setEnabled(!chosenStudent.getReport().isHasNoWork());
+                    openVarButton.setText("Редактировать оценку");
+                    deleteRateButton.setEnabled(true);
+                    noWorkButton.setEnabled(false);
+//                    personalReportButton.setEnabled(true);
+                } else {
+                    openVarButton.setEnabled(true);
+                    openVarButton.setText("Оценить работу");
+                    deleteRateButton.setEnabled(false);
+                    noWorkButton.setEnabled(true);
+//                    personalReportButton.setEnabled(false);
+                }
+            } catch (IndexOutOfBoundsException exception) {
+                System.out.println("Нет выбранного значения");
+            }
+    }//GEN-LAST:event_studentInfoListValueChanged
+
+        //@Override
+         //   public void valueChanged(ListSelectionEvent e) {
+                
+            //}
     /**
      * @param args the command line arguments
      */
@@ -240,18 +367,27 @@ private ArrayList<Group> groups;
         });
     }
 
+    public void updateStudentsList() {
+        DefaultListModel<Student> listModel = new DefaultListModel<>();
+        for (Student student : chosenGroup.getStudents()) {
+            listModel.addElement(student);
+        }
+        studentInfoList.setModel(listModel);
+        studentInfoList.setSelectedIndex(0);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createGroupReportButton;
     private javax.swing.JButton deleteRateButton;
     private javax.swing.JButton importStudentsButton;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelChooseGroup;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton noWorkButton;
     private javax.swing.JComboBox<String> numberGroup;
     private javax.swing.JButton openVarButton;
-    private javax.swing.JPanel starPanel;
-    private javax.swing.JList<String> studentsInfo;
+    private javax.swing.JPanel simplePanel;
+    private javax.swing.JPanel startPanel;
+    private javax.swing.JList studentInfoList;
     private javax.swing.JButton varFolderButton;
     // End of variables declaration//GEN-END:variables
 }
