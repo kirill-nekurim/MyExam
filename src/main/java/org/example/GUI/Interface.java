@@ -276,7 +276,7 @@ private Group chosenGroup;
                 try {
                     String path = varFolder.getPath() + "\\" + varNum + ".xlsx";
                     Var variant = ExcelHandler.importVar(path);
-                    StudentEstimation estimation = new StudentEstimation();
+                    StudentEstimation estimation = new StudentEstimation(variant, student, this);
                     setEnabled(false);
                     groups.get(numberGroup.getSelectedIndex()).getStudents().get(studentInfoList.getSelectedIndex())
                             .setReport(estimation.getReport());
