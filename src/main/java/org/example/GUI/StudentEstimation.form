@@ -48,12 +48,12 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="listOfTasks" min="-2" pref="166" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="showTaskButton" min="-2" pref="235" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="endRateButton" min="-2" pref="214" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -61,10 +61,13 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="scrollPane" min="-2" pref="577" max="-2" attributes="0"/>
-                              <Component id="description" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="description2" min="-2" pref="88" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="description" pref="143" max="32767" attributes="0"/>
+                                      <Component id="description2" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                                   <Component id="maxGrade" min="-2" pref="159" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -72,19 +75,19 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="rateButton" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel1" min="-2" pref="53" max="-2" attributes="0"/>
                               <Component id="jLabel3" min="-2" pref="37" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="fio" min="-2" pref="64" max="-2" attributes="0"/>
-                              <Component id="var" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="var" pref="158" max="32767" attributes="0"/>
+                              <Component id="fio" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="72" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="18" max="32767" attributes="0"/>
                       </Group>
+                      <Component id="rateButton" alignment="0" max="32767" attributes="0"/>
                       <Component id="textField1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -95,14 +98,16 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="listOfTasks" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="showTaskButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="endRateButton" alignment="3" max="32767" attributes="0"/>
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           <Component id="fio" min="-2" pref="15" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="listOfTasks" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="showTaskButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="endRateButton" alignment="3" max="32767" attributes="0"/>
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -121,11 +126,11 @@
                       </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="description" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="maxGrade" pref="26" max="32767" attributes="0"/>
-                      <Component id="description2" max="32767" attributes="0"/>
+                  <Component id="description" min="-2" pref="22" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="description2" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                      <Component id="maxGrade" alignment="3" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="32" max="32767" attributes="0"/>
               </Group>
