@@ -1,8 +1,10 @@
 package org.example.GUI;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Objects;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -12,9 +14,14 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.example.entities.Group;
 import org.example.entities.Student;
 import org.example.entities.StudentRecord;
+import org.example.entities.Task;
+import org.example.entities.TaskRecord;
 import org.example.entities.Var;
 import org.example.operations.ExcelHandler;
 
@@ -67,6 +74,8 @@ private Group chosenGroup;
         studentInfoList = new javax.swing.JList<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        allReportButton = new javax.swing.JButton();
+        personalReportButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,7 +149,8 @@ private Group chosenGroup;
             }
         });
 
-        numberGroup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        numberGroup.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        numberGroup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "№ группы" }));
         numberGroup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 numberGroupActionPerformed(evt);
@@ -172,6 +182,20 @@ private Group chosenGroup;
         jLabel4.setFont(new java.awt.Font("Segoe UI Emoji", 0, 24)); // NOI18N
         jLabel4.setText("4 step:");
 
+        allReportButton.setText("Course report");
+        allReportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                allReportButtonActionPerformed(evt);
+            }
+        });
+
+        personalReportButton.setText("Personal report");
+        personalReportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                personalReportButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelChooseGroupLayout = new javax.swing.GroupLayout(jPanelChooseGroup);
         jPanelChooseGroup.setLayout(jPanelChooseGroupLayout);
         jPanelChooseGroupLayout.setHorizontalGroup(
@@ -184,7 +208,9 @@ private Group chosenGroup;
                         .addGap(18, 18, 18)
                         .addGroup(jPanelChooseGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(numberGroup, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(createGroupReportButton, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)))
+                            .addComponent(createGroupReportButton, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                            .addComponent(allReportButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(personalReportButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanelChooseGroupLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(30, 30, 30)
@@ -212,15 +238,20 @@ private Group chosenGroup;
                     .addGroup(jPanelChooseGroupLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanelChooseGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(0, 15, Short.MAX_VALUE)
+                .addGroup(jPanelChooseGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelChooseGroupLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(jPanelChooseGroupLayout.createSequentialGroup()
                         .addComponent(numberGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 243, Short.MAX_VALUE)
-                        .addComponent(createGroupReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelChooseGroupLayout.createSequentialGroup()
-                        .addGap(0, 15, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(personalReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(createGroupReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(allReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54))))
         );
 
         javax.swing.GroupLayout startPanelLayout = new javax.swing.GroupLayout(startPanel);
@@ -276,7 +307,7 @@ private Group chosenGroup;
                 }
                 numberGroup.setModel(cbModel);
                 numberGroup.setEnabled(true);
-                //allReportButton.setEnabled(true);
+                allReportButton.setEnabled(true);
                 JOptionPane.showMessageDialog(Interface.this, "Студенты импортированы");
             } catch (IOException | InvalidFormatException ex) {
                 JOptionPane.showMessageDialog(Interface.this, "Ошибка при импорте файла");
@@ -286,7 +317,66 @@ private Group chosenGroup;
     }//GEN-LAST:event_importStudentsButtonActionPerformed
 
     private void createGroupReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createGroupReportButtonActionPerformed
-
+ int minGrade = 0;
+            try {
+                minGrade = Integer.parseInt(JOptionPane.showInputDialog(Interface.this, "Введите минимальный проходной балл:"));
+            } catch (NumberFormatException exception) {
+                JOptionPane.showMessageDialog(Interface.this, "Необходимо ввести целое число");
+            }
+            if (chosenGroup.getStudents().stream().filter(student -> student.getReport() == null).findFirst().orElse(null) != null) {
+                JOptionPane.showMessageDialog(Interface.this, "Не все студенты оценены");
+            } else {
+                XSSFWorkbook book = new XSSFWorkbook();
+                XSSFSheet sheet = book.createSheet("Отчет по группе " + chosenGroup.getName());
+                XSSFRow firstRow = sheet.createRow(0);
+                sheet.setColumnWidth(0, 8000);
+                firstRow.createCell(0).setCellValue("ФИО студента");
+                firstRow.createCell(1).setCellValue("Вариант");
+                Student studentWithMaxWorks = chosenGroup.getStudents().stream().filter(student -> student.getReport().getTasks() != null)
+                        .max(Comparator.comparing(student -> student.getReport().getTasks().size())).orElse(null);
+                int maxWorks = 0;
+                if (studentWithMaxWorks != null) {
+                    maxWorks = studentWithMaxWorks.getReport().getTasks().size();
+                }
+                for (int i = 0; i < maxWorks; i++) {
+                    firstRow.createCell(i + 2).setCellValue("Задание " + (i + 1));
+                }
+                firstRow.createCell(firstRow.getLastCellNum()).setCellValue("Оценка");
+                firstRow.createCell(firstRow.getLastCellNum()).setCellValue("Итог");
+                for (int i = 0; i < chosenGroup.getStudents().size(); i++) {
+                    Student student = chosenGroup.getStudents().get(i);
+                    XSSFRow row = sheet.createRow(i + 1);
+                    row.createCell(0).setCellValue(student.getFio());
+                    row.createCell(1).setCellValue(student.getVar());
+                    if (!student.getReport().isHasNoWork()) {
+                        for (int j = 0; j < maxWorks; j++) {
+                            if (j < student.getReport().getTasks().size()) {
+                                row.createCell(j + 2).setCellValue(student.getReport().getTasks().get(j).getReport().getGrade());
+                            } else row.createCell(j + 2).setCellValue("Нет задания");
+                        }
+                        int finalGrade = student.getReport().getTasks().stream().map(Task::getReport).mapToInt(TaskRecord::getGrade).sum();
+                        row.createCell(row.getLastCellNum()).setCellValue(finalGrade);
+                        if (finalGrade < minGrade) {
+                            row.createCell(row.getLastCellNum()).setCellValue("Незачет");
+                        } else row.createCell(row.getLastCellNum()).setCellValue("Зачет");
+                    } else {
+                        for (int j = 0; j < maxWorks; j++) {
+                            row.createCell(j + 2).setCellValue(0);
+                        }
+                        row.createCell(row.getLastCellNum()).setCellValue(0);
+                        row.createCell(row.getLastCellNum()).setCellValue("Нет работы");
+                    }
+                }
+                jFolderChooser.showDialog(null, "Выбрать папку сохранения");
+                File file = new File(jFolderChooser.getSelectedFile().getName() + chosenGroup.getName() + ".xlsx");
+                try {
+                    book.write(new FileOutputStream(file));
+                    book.close();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                JOptionPane.showMessageDialog(Interface.this, "Отчет сформирован");
+            }
     }//GEN-LAST:event_createGroupReportButtonActionPerformed
 
     private void varFolderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_varFolderButtonActionPerformed
@@ -353,23 +443,140 @@ private Group chosenGroup;
                     openVarButton.setText("Редактировать оценку");
                     deleteRateButton.setEnabled(true);
                     noWorkButton.setEnabled(false);
-//                    personalReportButton.setEnabled(true);
+                   personalReportButton.setEnabled(true);
                 } else {
                     openVarButton.setEnabled(true);
                     openVarButton.setText("Оценить работу");
                     deleteRateButton.setEnabled(false);
                     noWorkButton.setEnabled(true);
-//                    personalReportButton.setEnabled(false);
+                   personalReportButton.setEnabled(false);
                 }
             } catch (IndexOutOfBoundsException exception) {
                 System.out.println("Нет выбранного значения");
             }
     }//GEN-LAST:event_studentInfoListValueChanged
 
-        //@Override
-         //   public void valueChanged(ListSelectionEvent e) {
-                
-            //}
+    private void allReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allReportButtonActionPerformed
+        int minGrade;
+            try {
+                minGrade = Integer.parseInt(JOptionPane.showInputDialog(Interface.this, "Введите минимальный проходной балл:"));
+                boolean allStudentsRated = true;
+                for (Group group : groups) {
+                    if (group.getStudents().stream().filter(student -> student.getReport() == null).findFirst().orElse(null) != null) {
+                        allStudentsRated = false;
+                    }
+                }
+                if (!allStudentsRated) {
+                    JOptionPane.showMessageDialog(Interface.this, "Не все студенты оценены");
+                } else {
+                    XSSFWorkbook book = new XSSFWorkbook();
+                    for (Group group : groups) {
+                        XSSFSheet sheet = book.createSheet("Отчет по группе " + group.getName());
+                        XSSFRow firstRow = sheet.createRow(0);
+                        sheet.setColumnWidth(0, 8000);
+                        firstRow.createCell(0).setCellValue("ФИО студента");
+                        firstRow.createCell(1).setCellValue("Вариант");
+                        Student studentWithMaxWorks = group.getStudents().stream().filter(student -> student.getReport().getTasks() != null)
+                                .max(Comparator.comparing(student -> student.getReport().getTasks().size())).orElse(null);
+                        int maxWorks = 0;
+                        if (studentWithMaxWorks != null) {
+                            maxWorks = studentWithMaxWorks.getReport().getTasks().size();
+                        }
+                        for (int i = 0; i < maxWorks; i++) {
+                            firstRow.createCell(i + 2).setCellValue("Задание " + (i + 1));
+                        }
+                        firstRow.createCell(firstRow.getLastCellNum()).setCellValue("Оценка");
+                        firstRow.createCell(firstRow.getLastCellNum()).setCellValue("Итог");
+                        for (int i = 0; i < group.getStudents().size(); i++) {
+                            Student student = group.getStudents().get(i);
+                            XSSFRow row = sheet.createRow(i + 1);
+                            row.createCell(0).setCellValue(student.getFio());
+                            row.createCell(1).setCellValue(student.getVar());
+                            if (!student.getReport().isHasNoWork()) {
+                                for (int j = 0; j < maxWorks; j++) {
+                                    if (j < student.getReport().getTasks().size()) {
+                                        row.createCell(j + 2).setCellValue(student.getReport().getTasks().get(j).getReport().getGrade());
+                                    } else row.createCell(j + 2).setCellValue("Нет задания");
+                                }
+                                int finalGrade = student.getReport().getTasks().stream().map(Task::getReport).mapToInt(TaskRecord::getGrade).sum();
+                                row.createCell(row.getLastCellNum()).setCellValue(finalGrade);
+                                if (finalGrade < minGrade) {
+                                    row.createCell(row.getLastCellNum()).setCellValue("Незачет");
+                                } else row.createCell(row.getLastCellNum()).setCellValue("Зачет");
+                            } else {
+                                for (int j = 0; j < maxWorks; j++) {
+                                    row.createCell(j + 2).setCellValue(0);
+                                }
+                                row.createCell(row.getLastCellNum()).setCellValue(0);
+                                row.createCell(row.getLastCellNum()).setCellValue("Нет работы");
+                            }
+                        }
+                    }
+                    jFolderChooser.showDialog(null, "Выбрать папку сохранения");
+                    File file = new File(jFolderChooser.getSelectedFile().getName() + "Отчет по потоку" + ".xlsx");
+                    try {
+                        book.write(new FileOutputStream(file));
+                        book.close();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    JOptionPane.showMessageDialog(Interface.this, "Отчет сформирован");
+                }
+            } catch (NumberFormatException exception) {
+                JOptionPane.showMessageDialog(Interface.this, "Необходимо ввести целое число");
+            }
+    }//GEN-LAST:event_allReportButtonActionPerformed
+
+    private void personalReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_personalReportButtonActionPerformed
+         int minGrade = 0;
+            try {
+                minGrade = Integer.parseInt(JOptionPane.showInputDialog(Interface.this, "Введите минимальный проходной балл:"));
+            } catch (NumberFormatException exception) {
+                JOptionPane.showMessageDialog(Interface.this, "Необходимо ввести целое число");
+            }
+            XSSFWorkbook book = new XSSFWorkbook();
+            Student student = (Student) studentInfoList.getSelectedValue();
+            XSSFSheet sheet = book.createSheet("Отчет по студенту " + student.getFio());
+            XSSFRow firstRow = sheet.createRow(0);
+            sheet.setColumnWidth(0, 8000);
+            sheet.setColumnWidth(2, 10000);
+            firstRow.createCell(0).setCellValue(student.getFio());
+            firstRow.createCell(1).setCellValue(chosenGroup.getName());
+            if (!student.getReport().isHasNoWork()) {
+                XSSFRow secondRow = sheet.createRow(2);
+                secondRow.createCell(0).setCellValue("Задание:");
+                secondRow.createCell(1).setCellValue("Оценка:");
+                secondRow.createCell(2).setCellValue("Комментарий:");
+                for (Task task : student.getReport().getTasks()) {
+                    XSSFRow row = sheet.createRow(sheet.getLastRowNum() + 1);
+                    row.createCell(0).setCellValue("Задание " + (task.getTaskNumber() + 1));
+                    row.createCell(1).setCellValue(task.getReport().getGrade());
+                    row.createCell(2).setCellValue(task.getReport().getComment());
+                }
+                XSSFRow lastRow = sheet.createRow(sheet.getLastRowNum() + 1);
+                lastRow.createCell(0).setCellValue("Итог:");
+                int finalGrade = student.getReport().getTasks().stream().map(Task::getReport).mapToInt(TaskRecord::getGrade).sum();
+                lastRow.createCell(1).setCellValue(finalGrade);
+                if (finalGrade >= minGrade) {
+                    lastRow.createCell(2).setCellValue("Зачет");
+                } else lastRow.createCell(2).setCellValue("Незачет");
+            } else {
+                XSSFRow lastRow = sheet.createRow(2);
+                lastRow.createCell(0).setCellValue("Итог:");
+                lastRow.createCell(1).setCellValue("Нет работы");
+            }
+            jFolderChooser.showDialog(null, "Выбрать папку сохранения");
+            File file = new File(jFolderChooser.getSelectedFile().getName() + student.getFio() + ".xlsx");
+            try {
+                book.write(new FileOutputStream(file));
+                book.close();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            JOptionPane.showMessageDialog(Interface.this, "Отчет сформирован");
+    }//GEN-LAST:event_personalReportButtonActionPerformed
+
+       
     /**
      * @param args the command line arguments
      */
@@ -415,6 +622,7 @@ private Group chosenGroup;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton allReportButton;
     private javax.swing.JButton createGroupReportButton;
     private javax.swing.JButton deleteRateButton;
     private javax.swing.JButton importStudentsButton;
@@ -427,6 +635,7 @@ private Group chosenGroup;
     private javax.swing.JButton noWorkButton;
     private javax.swing.JComboBox<String> numberGroup;
     private javax.swing.JButton openVarButton;
+    private javax.swing.JButton personalReportButton;
     private javax.swing.JPanel simplePanel;
     private javax.swing.JPanel startPanel;
     private javax.swing.JList studentInfoList;
