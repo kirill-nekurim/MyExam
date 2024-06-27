@@ -368,7 +368,7 @@ private Group chosenGroup;
                     }
                 }
                 jFolderChooser.showDialog(null, "Выбрать папку сохранения");
-                File file = new File(jFolderChooser.getSelectedFile().getName() + chosenGroup.getName() + ".xlsx");
+                File file = new File(jFolderChooser.getSelectedFile(),jFolderChooser.getSelectedFile().getName() + chosenGroup.getName() + ".xlsx");
                 try {
                     book.write(new FileOutputStream(file));
                     book.close();
@@ -513,7 +513,9 @@ private Group chosenGroup;
                         }
                     }
                     jFolderChooser.showDialog(null, "Выбрать папку сохранения");
-                    File file = new File(jFolderChooser.getSelectedFile().getName() + "Отчет по потоку" + ".xlsx");
+//                    File file = new File(jFolderChooser.getSelectedFile().getName() + "Отчет по потоку" + ".xlsx");
+                      File file = new File(jFolderChooser.getSelectedFile(), 
+                              jFolderChooser.getSelectedFile().getName() + "Отчет по потоку" + ".xlsx");
                     try {
                         book.write(new FileOutputStream(file));
                         book.close();
@@ -566,7 +568,8 @@ private Group chosenGroup;
                 lastRow.createCell(1).setCellValue("Нет работы");
             }
             jFolderChooser.showDialog(null, "Выбрать папку сохранения");
-            File file = new File(jFolderChooser.getSelectedFile().getName() + student.getFio() + ".xlsx");
+            
+            File file = new File(jFolderChooser.getSelectedFile(), jFolderChooser.getSelectedFile().getName() + student.getFio() + ".xlsx");
             try {
                 book.write(new FileOutputStream(file));
                 book.close();

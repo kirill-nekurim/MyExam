@@ -24,12 +24,12 @@ public class StudentEstimation extends javax.swing.JFrame {
      * Creates new form StudentEstimation
      */
     public StudentEstimation(Var variant, Student student, Interface intrface) {
-        
+         this.intrface = intrface;
         initComponents();
         setContentPane(estimationPanel);
         setTitle("Задания варианта");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(1150, 600);
+        setSize(1200, 600);
         setLocationRelativeTo(null);
         setVisible(true);
         if (student.getReport() != null) {
@@ -103,22 +103,18 @@ public class StudentEstimation extends javax.swing.JFrame {
 
         description2.setText("Max rate:");
 
-        maxGrade.setText("max rate is...");
-
         javax.swing.GroupLayout maxRatePanelLayout = new javax.swing.GroupLayout(maxRatePanel);
         maxRatePanel.setLayout(maxRatePanelLayout);
         maxRatePanelLayout.setHorizontalGroup(
             maxRatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(maxRatePanelLayout.createSequentialGroup()
-                .addComponent(maxGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 42, Short.MAX_VALUE))
+            .addGap(0, 201, Short.MAX_VALUE)
         );
         maxRatePanelLayout.setVerticalGroup(
             maxRatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, maxRatePanelLayout.createSequentialGroup()
-                .addGap(0, 12, Short.MAX_VALUE)
-                .addComponent(maxGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 28, Short.MAX_VALUE)
         );
+
+        maxGrade.setText("max rate is...");
 
         javax.swing.GroupLayout bothDescriptionPanelLayout = new javax.swing.GroupLayout(bothDescriptionPanel);
         bothDescriptionPanel.setLayout(bothDescriptionPanelLayout);
@@ -131,6 +127,8 @@ public class StudentEstimation extends javax.swing.JFrame {
                     .addGroup(bothDescriptionPanelLayout.createSequentialGroup()
                         .addComponent(description2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(maxGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(maxRatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
@@ -142,7 +140,9 @@ public class StudentEstimation extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(bothDescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(maxRatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(description2, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(bothDescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(description2)
+                        .addComponent(maxGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -426,9 +426,11 @@ public class StudentEstimation extends javax.swing.JFrame {
        if (tasks.stream().filter(task -> task.getReport() == null).findFirst().orElse(null) != null) {
                 JOptionPane.showMessageDialog(StudentEstimation.this, "Не все задания оценены");
             } else {
-                report.setTasks(tasks);
-                intrface.setEnabled(true);
-                dispose();
+                 report.setTasks(tasks);
+        intrface.setEnabled(true);
+        intrface.setVisible(true); 
+        intrface.toFront(); 
+        dispose();
             }
     }//GEN-LAST:event_endRateButtonActionPerformed
 
