@@ -150,7 +150,7 @@ private Group chosenGroup;
         });
 
         numberGroup.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        numberGroup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "№ группы" }));
+        numberGroup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "№ group" }));
         numberGroup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 numberGroupActionPerformed(evt);
@@ -165,7 +165,7 @@ private Group chosenGroup;
         });
 
         studentInfoList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "List of the group will appear here" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -213,11 +213,11 @@ private Group chosenGroup;
                             .addComponent(personalReportButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanelChooseGroupLayout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addGap(30, 30, 30)
-                        .addComponent(noWorkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(openVarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
+                        .addGap(18, 18, 18)
+                        .addComponent(openVarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63)
+                        .addComponent(noWorkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
                         .addComponent(deleteRateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -235,14 +235,9 @@ private Group chosenGroup;
                             .addComponent(noWorkButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE))
-                    .addGroup(jPanelChooseGroupLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel3))
                 .addGap(0, 15, Short.MAX_VALUE)
-                .addGroup(jPanelChooseGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelChooseGroupLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                .addGroup(jPanelChooseGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanelChooseGroupLayout.createSequentialGroup()
                         .addComponent(numberGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -250,8 +245,9 @@ private Group chosenGroup;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(createGroupReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(allReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54))))
+                        .addComponent(allReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout startPanelLayout = new javax.swing.GroupLayout(startPanel);
@@ -295,10 +291,14 @@ private Group chosenGroup;
     }// </editor-fold>//GEN-END:initComponents
 
     private void importStudentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importStudentsButtonActionPerformed
-         FileNameExtensionFilter filter = new FileNameExtensionFilter("", "xlsx");
+         FileNameExtensionFilter filter = new FileNameExtensionFilter("Students.xlsx", "xlsx");
             jFileChooser.setFileFilter(filter);
             jFileChooser.showDialog(null, "Choose file:");
             File file = jFileChooser.getSelectedFile();
+             if (!file.getName().equals("Students.xlsx")) {
+        JOptionPane.showMessageDialog(Interface.this, "Пожалуйста, выберите Students.xlsx файл");
+        return;
+    }
             try {
                 DefaultComboBoxModel<String> cbModel = new DefaultComboBoxModel<>();
                 groups = ExcelHandler.importStudents(file);
@@ -402,7 +402,7 @@ private Group chosenGroup;
             if (student != null) {
                 varNum = student.getVar();
                 try {
-                    String path = varFolder.getPath() + "\\" + varNum + ".xlsx";
+                    String path = varFolder.getPath() + "\\" + "Вар8_приложение"+ varNum + ".xlsx";
                     Var variant = ExcelHandler.importVar(path);
                     StudentEstimation estimation = new StudentEstimation(variant, student, this);
                     setEnabled(false);
@@ -440,13 +440,13 @@ private Group chosenGroup;
                 Student chosenStudent = chosenGroup.getStudents().get(chosenStudentIndex);
                 if (chosenStudent.getReport() != null) {
                     openVarButton.setEnabled(!chosenStudent.getReport().isHasNoWork());
-                    openVarButton.setText("Редактировать оценку");
+                    openVarButton.setText("Redacte the rate");
                     deleteRateButton.setEnabled(true);
                     noWorkButton.setEnabled(false);
                    personalReportButton.setEnabled(true);
                 } else {
                     openVarButton.setEnabled(true);
-                    openVarButton.setText("Оценить работу");
+                    openVarButton.setText("Rate work");
                     deleteRateButton.setEnabled(false);
                     noWorkButton.setEnabled(true);
                    personalReportButton.setEnabled(false);

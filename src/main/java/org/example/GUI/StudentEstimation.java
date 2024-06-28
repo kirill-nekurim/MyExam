@@ -20,6 +20,7 @@ public class StudentEstimation extends javax.swing.JFrame {
  Var variant;
         Student student;
         Interface intrface;
+        
     /**
      * Creates new form StudentEstimation
      */
@@ -53,8 +54,8 @@ public class StudentEstimation extends javax.swing.JFrame {
         estimationPanel = new javax.swing.JPanel();
         bothDescriptionPanel = new javax.swing.JPanel();
         descriptionPanel = new javax.swing.JPanel();
-        description = new javax.swing.JLabel();
-        description2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        description = new javax.swing.JTextArea();
         maxRatePanel = new javax.swing.JPanel();
         maxGrade = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -69,80 +70,89 @@ public class StudentEstimation extends javax.swing.JFrame {
         fio = new javax.swing.JLabel();
         varLabel = new javax.swing.JLabel();
         var = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        commentTextField = new javax.swing.JTextField();
         enterCommentLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         list1 = new javax.swing.JList<>();
         listOfTasks = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        commentTextField = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         scrollPane = new javax.swing.JScrollPane();
         table1 = new javax.swing.JTable();
         showTaskButton = new javax.swing.JButton();
         endRateButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        description.setText("Task description:");
+        description.setColumns(20);
+        description.setLineWrap(true);
+        description.setRows(5);
+        description.setTabSize(20);
+        description.setText("Task description:\n");
+        jScrollPane2.setViewportView(description);
 
         javax.swing.GroupLayout descriptionPanelLayout = new javax.swing.GroupLayout(descriptionPanel);
         descriptionPanel.setLayout(descriptionPanelLayout);
         descriptionPanelLayout.setHorizontalGroup(
             descriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, descriptionPanelLayout.createSequentialGroup()
-                .addGap(0, 6, Short.MAX_VALUE)
-                .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(descriptionPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 872, Short.MAX_VALUE)
+                .addContainerGap())
         );
         descriptionPanelLayout.setVerticalGroup(
             descriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(descriptionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        description2.setText("Max rate:");
+        maxGrade.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        maxGrade.setText("Max rate is...");
 
         javax.swing.GroupLayout maxRatePanelLayout = new javax.swing.GroupLayout(maxRatePanel);
         maxRatePanel.setLayout(maxRatePanelLayout);
         maxRatePanelLayout.setHorizontalGroup(
             maxRatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 201, Short.MAX_VALUE)
+            .addGroup(maxRatePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(maxGrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         maxRatePanelLayout.setVerticalGroup(
             maxRatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 28, Short.MAX_VALUE)
+            .addGroup(maxRatePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(maxGrade)
+                .addContainerGap(11, Short.MAX_VALUE))
         );
-
-        maxGrade.setText("max rate is...");
 
         javax.swing.GroupLayout bothDescriptionPanelLayout = new javax.swing.GroupLayout(bothDescriptionPanel);
         bothDescriptionPanel.setLayout(bothDescriptionPanelLayout);
         bothDescriptionPanelLayout.setHorizontalGroup(
             bothDescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bothDescriptionPanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(bothDescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(descriptionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(bothDescriptionPanelLayout.createSequentialGroup()
-                        .addComponent(description2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(maxGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(maxRatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(descriptionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(bothDescriptionPanelLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(maxRatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         bothDescriptionPanelLayout.setVerticalGroup(
             bothDescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bothDescriptionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(descriptionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addGroup(bothDescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(maxRatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(bothDescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(description2)
-                        .addComponent(maxGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(descriptionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(maxRatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -167,6 +177,7 @@ public class StudentEstimation extends javax.swing.JFrame {
             }
         });
 
+        automaticCommentLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         automaticCommentLabel.setText("Automatic comment:");
 
         rateButton.setText("Rate task");
@@ -182,21 +193,30 @@ public class StudentEstimation extends javax.swing.JFrame {
             }
         });
 
-        rateTaskLabel.setText("Rate the task:");
+        rateTaskLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        rateTaskLabel.setText("Rate the task");
 
         studentLabel.setText("Student:");
 
         varLabel.setText("Var:");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("3 step:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(textField1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textField1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(rateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(automaticCommentLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(correctButton, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                    .addComponent(notCompletedButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(withoutCommentButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(studentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(varLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -204,14 +224,11 @@ public class StudentEstimation extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(var, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(rateTaskLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 48, Short.MAX_VALUE))
-                    .addComponent(rateButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(automaticCommentLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(correctButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(notCompletedButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(withoutCommentButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rateTaskLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -225,15 +242,17 @@ public class StudentEstimation extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(varLabel)
                     .addComponent(var, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
+                .addGap(28, 28, 28)
+                .addComponent(jLabel2)
+                .addGap(12, 12, 12)
                 .addComponent(rateTaskLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(automaticCommentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(correctButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(notCompletedButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,6 +261,7 @@ public class StudentEstimation extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        enterCommentLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         enterCommentLabel.setText("Enter a comment:");
 
         list1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -251,22 +271,32 @@ public class StudentEstimation extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(list1);
 
-        listOfTasks.setText("Список заданий:");
+        listOfTasks.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        listOfTasks.setText("1 step: Choose task");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setText("4 step:");
+
+        commentTextField.setColumns(20);
+        commentTextField.setLineWrap(true);
+        commentTextField.setRows(5);
+        jScrollPane3.setViewportView(commentTextField);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(listOfTasks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(listOfTasks, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(enterCommentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 2, Short.MAX_VALUE))
-                    .addComponent(commentTextField, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(enterCommentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 2, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -276,22 +306,33 @@ public class StudentEstimation extends javax.swing.JFrame {
                 .addComponent(listOfTasks)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(enterCommentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(commentTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(enterCommentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Selected task will appear here"
             }
         ));
         scrollPane.setViewportView(table1);
@@ -310,6 +351,9 @@ public class StudentEstimation extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("2 step:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -318,13 +362,15 @@ public class StudentEstimation extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(scrollPane)
-                        .addContainerGap())
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(showTaskButton, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addComponent(endRateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))))
+                        .addGap(15, 15, 15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(scrollPane)
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,9 +378,10 @@ public class StudentEstimation extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(showTaskButton)
-                    .addComponent(endRateButton))
+                    .addComponent(endRateButton)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -399,16 +446,15 @@ public class StudentEstimation extends javax.swing.JFrame {
            notCompletedButton.setEnabled(true);
            withoutCommentButton.setEnabled(true);
             Task task = tasks.get(list1.getSelectedIndex());
-            if (task.getCondition().length() > 125) {
-                description.setText(task.getCondition().substring(0, 125) + "-");
-                description2.setText(task.getCondition().substring(125));
-            } else {
+            description.setText(task.getCondition());
+            if (task.getCondition().length() < 125)  {
                 description.setText(task.getCondition());
-                description2.setText("");
+                
             }
             if (task.getMaxGrade() > 4) {
-                maxGrade.setText(task.getMaxGrade() + " баллов");
-            } else maxGrade.setText(task.getMaxGrade() + " балла");
+                maxGrade.setText("Максимальное количество баллов за задание: " 
+                        + task.getMaxGrade() + " баллов");
+            } else maxGrade.setText("Максимальное количество баллов за задание: " + task.getMaxGrade() + " балла");
             if (tasks.get(list1.getSelectedIndex()).getReport() != null) {
                 textField1.setText(tasks.get(list1.getSelectedIndex()).getReport().getGrade() + "");
             }
@@ -444,6 +490,7 @@ public class StudentEstimation extends javax.swing.JFrame {
         } else {
             TaskRecord taskReport = new TaskRecord();
             taskReport.setGrade(grade);
+            taskReport.setComment(commentTextField.getText());
             tasks.get(list1.getSelectedIndex()).setReport(taskReport);
             updateTasksList();
         }
@@ -521,19 +568,23 @@ public class StudentEstimation extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel automaticCommentLabel;
     private javax.swing.JPanel bothDescriptionPanel;
-    private javax.swing.JTextField commentTextField;
+    private javax.swing.JTextArea commentTextField;
     private javax.swing.JButton correctButton;
-    private javax.swing.JLabel description;
-    private javax.swing.JLabel description2;
+    private javax.swing.JTextArea description;
     private javax.swing.JPanel descriptionPanel;
     private javax.swing.JButton endRateButton;
     private javax.swing.JLabel enterCommentLabel;
     private javax.swing.JPanel estimationPanel;
     private javax.swing.JLabel fio;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList list1;
     private javax.swing.JLabel listOfTasks;
     private javax.swing.JLabel maxGrade;
